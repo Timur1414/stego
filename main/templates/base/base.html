@@ -11,6 +11,13 @@
     {% block extra_css %}{% endblock %}
 </head>
 <body>
+    <header>
+        {% if request.user.is_authenticated %}
+            {% include 'base/auth_menu.html' %}
+        {% else %}
+            {% include 'base/unauth_menu.html' %}
+        {% endif %}
+    </header>
     <main>
         {% block content %}{% endblock %}
     </main>
