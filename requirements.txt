@@ -1,0 +1,6 @@
+# Engine
+Django==4.0.2
+django-registration==3.2
+django-crispy-forms==1.14.0
+crispy-bootstrap5==0.6
+python-dotenv==0.19.2
