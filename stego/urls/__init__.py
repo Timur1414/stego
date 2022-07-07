@@ -13,12 +13,18 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 from main import views
+from stego import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index_page)
+    path('', views.index_page, name='index'),
+    path('accounts/', include('stego.urls.accounts')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
