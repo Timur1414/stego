@@ -10,10 +10,23 @@
     {% endblock %}
     {% block extra_css %}{% endblock %}
 </head>
-<body>
-    <main>
+<body class="bg-dark">
+    <header class="position-fixed w-100 bg-dark" style="max-height: 15%; z-index: 1">
+        {% if request.user.is_authenticated %}
+            {% include 'base/auth_menu.html' %}
+        {% else %}
+            {% include 'base/unauth_menu.html' %}
+        {% endif %}
+    </header>
+
+    <main class="p-2 position-absolute" style="top: 15%">
         {% block content %}{% endblock %}
     </main>
+
+    <footer class="p-2 text-white">
+        *контакты*
+    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     {% block extra_js %}{% endblock %}
 </body>

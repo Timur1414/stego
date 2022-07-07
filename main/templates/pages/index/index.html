@@ -1,5 +1,45 @@
 {% extends 'base/base.html' %}
 
 {% block content %}
-    <h1>index</h1>
+    <div class="text-center text-danger">
+        <h1>ТРЕНИРУЙСЯ</h1>
+        <h1>УЧИСЬ</h1>
+        <H1>СОВЕРШЕНСТВУЙСЯ</H1>
+        <h1>ПОБЕЖДАЙ</h1>
+        <p class="text-white fs-4">всё это на платформе STEGO</p>
+    </div>
+    <a class="btn btn-success position-relative" href="{% url 'django_registration_register' %}" style="left: 25%">
+        Зарегистрироваться
+    </a>
+    <br><br><br>
+
+    <div class="card mx-auto my-5" style="width: 50%">
+        <div class="card-header">
+            Оттачивайте навыки
+        </div>
+        <div class="card-body">
+            Решайте задачи по стеганографии разного уровня сложности и разной категории
+        </div>
+    </div>
+
+    <div class="card mx-auto my-5" style="width: 50%">
+        <div class="card-header">
+            Lorem ipsum
+        </div>
+        <div class="card-body">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua. Venenatis urna cursus eget nunc
+            scelerisque viverra mauris in. Amet volutpat consequat mauris nunc congue nisi.
+        </div>
+    </div>
+
+    <div class="card mx-auto my-5" style="width: 50%">
+        <div class="card-header">
+            Lorem ipsum
+        </div>
+        <div class="card-body">
+            Fames ac turpis egestas maecenas pharetra convallis posuere morbi leo.
+            Odio ut enim blandit volutpat maecenas volutpat.
+        </div>
+    </div>
 {% endblock %}
