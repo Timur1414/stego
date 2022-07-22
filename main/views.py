@@ -39,3 +39,7 @@ def index_page(request):
         'pagename': 'Главная'
     }
     return render(request, 'pages/index/index.html', context)
+
+
+def profile_page():
+    pass
