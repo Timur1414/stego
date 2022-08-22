@@ -32,6 +32,6 @@ urlpatterns = [
     path('password_change/done/', views.password_change_done, name='password_change_done'),
     path('', include('django_registration.backends.one_step.urls')),
     path('', include('django.contrib.auth.urls')),
-    # path('profile/<int:pk>/', views.ProfilePage.as_view(), name='profile'),
+    path('profile/<int:pk>/', views.ProfilePage.as_view(), name='profile'),
     # path('profile/<int:pk>/settings/', views.ProfileSettings.as_view(), name='profile_settings'),
 ]
