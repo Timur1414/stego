@@ -1,0 +1,35 @@
+{% extends "base/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row" style="position: relative; left: 40vw">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col">
+                        <h4> Авторизация </h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <form action="{% url 'login' %}" method="POST" class="m-2" id="form">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit" class="btn btn-success">Войти</button>
+                        </div>
+                        <div class="col">
+                            <a href="/accounts/password_reset/">Забыли пароль?</a>
+                            <br>
+                            <a href="{% url 'django_registration_register' %}">Зарегистрироваться</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,11 +1,13 @@
 {% extends "base/base.html" %}
 
 {% block content %}
-    <div class="col">
-        <div class="text-white">
-            <p>Регистрация прошла успешно</p>
-            <br>
-            <a href="{% url 'index' %}">На главную</a>
+    <div class="row">
+        <div class="col">
+            <div class="text-white">
+                <p>Регистрация прошла успешно</p>
+                <br>
+                <a href="{% url 'index' %}">На главную</a>
+            </div>
         </div>
     </div>
 {% endblock %}
