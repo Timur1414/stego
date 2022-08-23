@@ -9,6 +9,8 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic import DetailView
 
+from main.models import UserSettings
+
 
 @login_required()
 def password_change_done(request):
@@ -48,7 +50,11 @@ class ProfilePage(LoginRequiredMixin, DetailView):
     Страница профиля
     """
     model = get_user_model()
+    template_name = 'pages/profile/index.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        user = self.object
+        usersettings = UserSettings.objects.get(user=user)
+        context['username'] = user.username
         return context

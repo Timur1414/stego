@@ -1,0 +1,14 @@
+{% extends "base/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="col">
+        <div class="text-white">
+            <form action="{% url 'django_registration_register' %}" method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <input class="btn btn-success" type="submit" value="Зарегистрироваться">
+            </form>
+        </div>
+    </div>
+{% endblock %}
