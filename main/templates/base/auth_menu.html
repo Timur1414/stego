@@ -4,5 +4,6 @@
     </div>
     <div class="col d-flex justify-content-end p-0">
         <a class="btn btn-primary mx-1 my-auto" href="{% url 'logout' %}">Выйти</a>
+        <a class="btn btn-danger mx-1 my-auto" href="{% url 'profile' pk=request.user.id %}">Профиль</a>
     </div>
 </div>
