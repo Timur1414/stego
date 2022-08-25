@@ -5,10 +5,12 @@ from django.contrib.auth import logout, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from django.views.generic import DetailView
+from django.views.generic import DetailView, UpdateView
 
+from main.forms import UserSettingsEditForm
 from main.models import UserSettings
 
 
@@ -55,9 +57,60 @@ class ProfilePage(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.object
-        usersettings = UserSettings.objects.get(user=user)
+        usersettings = UserSettings.get_usersettings_by_user(user)
         context['user'] = user
         context['username'] = user.username
         context['pagename'] = user.username
         context['avatar'] = usersettings.avatar
+        return context
+
+
+class ProfileSettingsPage(LoginRequiredMixin, UpdateView):
+    """
+    Страница настроек
+    """
+    model = get_user_model()
+    fields = ['first_name', 'last_name', 'email']
+    template_name = 'pages/profile/settings/index.html'
+
+    def get_success_url(self) -> str:
+        """
+        Определение URL, на которую нужно перейти в случае, если данные будут записаны успешно
+
+        :return: строка с готовым URL
+        :rtype: :class:`str`
+        """
+        return reverse("profile", kwargs={'pk': self.object.id})
+
+    def get_object(self, queryset=None):
+        """
+        Получение user'а
+        """
+        return self.request.user
+
+    def post(self, request, *args, **kwargs) -> HttpResponse:
+        """
+        Обработчик POST-запроса на данной странице.
+
+        Кроме базового сохранения формы - проверяем и сохраняет UserSettings'ы.
+
+        :param request: словарь с параметрами POST-запроса
+        :return: объект HttpResponse с редиректом внутри.
+        :rtype: :class:`django.http.HttpResponse`
+        """
+        usersettings_form = UserSettingsEditForm(
+            instance=self.request.user.usersettings,
+            data=self.request.POST,
+            files=self.request.FILES
+        )
+        if usersettings_form.is_valid():
+            usersettings_form.save()
+        return super().post(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['pagename'] = 'Настройки'
+        user = self.object
+        usersettings = UserSettings.objects.get(user=user)
+        context['settings_form'] = UserSettingsEditForm(instance=self.request.user.usersettings)
         return context

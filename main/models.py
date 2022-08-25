@@ -14,6 +14,18 @@ class UserSettings(models.Model):
     user = models.OneToOneField(to=get_user_model(), on_delete=models.CASCADE)
     avatar = models.ImageField(upload_to='images/users/', default='images/users/no_avatar.png')
 
+    @staticmethod
+    def get_usersettings_by_user(user: get_user_model):
+        """
+        Получение usersettings о user
+        """
+        usersettings, created = UserSettings.objects.get_or_create(
+            user=user
+        )
+        if created:
+            usersettings.save()
+        return usersettings
+
 
 @receiver(post_save, sender=get_user_model())
 def update_profile_signal(sender, instance, created, **kwargs):  # pylint: disable=unused-argument

@@ -6,6 +6,7 @@
 
             {% include "pages/profile/people_card.html" %}
             {% if request.user == user %}
+                <a class="btn btn-primary" href="{% url 'profile_settings' %}" style="position:absolute; right: 5vw; top: 0">Настройки</a>
                 {% include "pages/profile/suggestion_task.html" %}
                 {% include "pages/profile/history_and_my_tasks.html" %}
             {% else %}

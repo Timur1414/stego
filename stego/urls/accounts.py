@@ -33,5 +33,5 @@ urlpatterns = [
     path('', include('django_registration.backends.one_step.urls')),
     path('', include('django.contrib.auth.urls')),
     path('profile/<int:pk>/', views.ProfilePage.as_view(), name='profile'),
-    # path('profile/<int:pk>/settings/', views.ProfileSettings.as_view(), name='profile_settings'),
+    path('profile/settings/', views.ProfileSettingsPage.as_view(), name='profile_settings'),
 ]
