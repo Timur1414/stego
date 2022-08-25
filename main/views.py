@@ -56,6 +56,7 @@ class ProfilePage(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         user = self.object
         usersettings = UserSettings.objects.get(user=user)
+        context['user'] = user
         context['username'] = user.username
         context['pagename'] = user.username
         context['avatar'] = usersettings.avatar

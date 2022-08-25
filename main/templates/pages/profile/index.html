@@ -5,8 +5,12 @@
         <div class="col text-white">
 
             {% include "pages/profile/people_card.html" %}
-            {% include "pages/profile/suggestion_task.html" %}
-            {% include "pages/profile/history_and_my_tasks.html" %}
+            {% if request.user == user %}
+                {% include "pages/profile/suggestion_task.html" %}
+                {% include "pages/profile/history_and_my_tasks.html" %}
+            {% else %}
+                {% include "pages/profile/created_tasks.html" %}
+            {% endif %}
 
         </div>
     </div>
