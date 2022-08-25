@@ -3,13 +3,11 @@
 {% block content %}
     <div class="row m-0">
         <div class="col text-white">
-            <div class="card text-center border border-danger mx-auto" style="background-color: #1E0400; width: 20%">
-                <img class="card-img-top" src="{{ avatar.url }}" alt="avatar">
-                <div class="card-body">
-                    <strong class="text-danger fs-4">{{ username }}</strong> <br>
-                    <p>Опыт: ...</p>
-                </div>
-            </div>
+
+            {% include "pages/profile/people_card.html" %}
+            {% include "pages/profile/suggestion_task.html" %}
+            {% include "pages/profile/history_and_my_tasks.html" %}
+
         </div>
     </div>
 {% endblock %}
