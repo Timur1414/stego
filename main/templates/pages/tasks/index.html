@@ -3,7 +3,14 @@
 {% block content %}
     <div class="row m-0">
         <div class="col text-white">
-            
+            <h4>Список задач</h4>
+            <div>
+                {% for item in tasks %}
+
+                {% empty %}
+                    <p>Задач нет</p>
+                {% endfor %}
+            </div>
         </div>
     </div>
 {% endblock %}

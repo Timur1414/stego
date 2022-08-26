@@ -7,6 +7,6 @@ from main import views
 
 
 urlpatterns = [
-    path('list', views.TasksPage.as_view(), name='task_list'),
+    path('list', views.TaskListPage.as_view(), name='task_list'),
 
 ]

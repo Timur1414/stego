@@ -40,3 +40,32 @@ def update_profile_signal(sender, instance, created, **kwargs):  # pylint: disab
     if not created:
         return
     UserSettings.objects.create(user=instance)
+
+
+class Task(models.Model):
+    """
+    Модель задачи
+    """
+    author = models.ForeignKey(to=get_user_model(), on_delete=models.CASCADE)
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    image = models.ImageField(upload_to='images/tasks/')
+    answer = models.CharField(max_length=255)
+    points = models.IntegerField()
+    group = models.CharField(max_length=255, blank=True)
+    created = models.DateTimeField(auto_now_add=True, null=False)
+    active = models.BooleanField(default=True)
+
+    @staticmethod
+    def get_active():
+        """
+        Получение только активных задач
+        """
+        return Task.objects.filter(active=True)
+
+    @staticmethod
+    def get_by_group(group: str):
+        """
+        Получение задач по группе (блоку)
+        """
+        return Task.objects.filter(active=True, group=group)

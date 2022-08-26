@@ -11,7 +11,7 @@ from django.urls import reverse
 from django.views.generic import DetailView, UpdateView, ListView
 
 from main.forms import UserSettingsEditForm
-from main.models import UserSettings
+from main.models import UserSettings, Task
 
 
 @login_required()
@@ -116,13 +116,15 @@ class ProfileSettingsPage(LoginRequiredMixin, UpdateView):
         return context
 
 
-class TasksPage(LoginRequiredMixin, ListView):
+class TaskListPage(LoginRequiredMixin, ListView):
     """
     Страница со списком задач
     """
     template_name = 'pages/tasks/index.html'
+    model = Task
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)
-
+        context['pagename'] = 'Список задач'
+        context['tasks'] = Task.get_active()
         return context
