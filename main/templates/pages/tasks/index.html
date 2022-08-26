@@ -4,11 +4,9 @@
     <div class="row m-0">
         <div class="col text-white">
             <h3 class="text-center text-danger">Список задач</h3>
-            <div class="mt-5">
+            <div class="mt-5 d-flex justify-content-around flex-wrap">
                 {% for item in tasks %}
-                    <div class="d-flex justify-content-around">
-                        {% include "pages/tasks/card.html" %}
-                    </div>
+                    {% include "pages/tasks/card.html" %}
                 {% empty %}
                     <p>Задач нет</p> <br>
                     <a class="link-danger" href="{% url 'create_task' %}">Создайте свою</a>
