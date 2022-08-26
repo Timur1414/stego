@@ -1,0 +1,16 @@
+{% extends "base/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="row m-0">
+        <div class="col-8 text-danger mx-auto">
+            <h3 class="text-center">Создание задачи</h3>
+            <form action="{% url 'create_task' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form | crispy }}
+                <input type="submit" class="btn btn-primary" value="Создать">
+                <button class="btn btn-secondary" onclick="history.back();">Отменить</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

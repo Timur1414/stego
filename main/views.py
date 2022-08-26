@@ -8,9 +8,9 @@ from django.contrib.auth.views import LoginView
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from django.views.generic import DetailView, UpdateView, ListView
+from django.views.generic import DetailView, UpdateView, ListView, CreateView
 
-from main.forms import UserSettingsEditForm
+from main.forms import UserSettingsEditForm, CreateTaskForm
 from main.models import UserSettings, Task
 
 
@@ -127,4 +127,25 @@ class TaskListPage(LoginRequiredMixin, ListView):
         context = super().get_context_data(object_list=object_list, **kwargs)
         context['pagename'] = 'Список задач'
         context['tasks'] = Task.get_active()
+        return context
+
+
+class CreateTaskPage(LoginRequiredMixin, CreateView):
+    """
+    Страница создания задачи
+    """
+    model = Task
+    fields = ['author', 'title', 'description', 'image', 'answer', 'points', 'group']
+    template_name = 'pages/tasks/create.html'
+
+    def get_success_url(self):
+        """
+        Получение перенаправляющей ссылки при успешном создании задачи
+        """
+        return reverse('task_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['pagename'] = 'Создание задачи'
+        context['form'] = CreateTaskForm(initial={'author': self.request.user})
         return context
