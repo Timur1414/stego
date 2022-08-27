@@ -141,7 +141,7 @@ class TaskPage(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         task = self.object
         if not task.active:
-            return Http404
+            raise Http404
         context['pagename'] = task.title
         context['task'] = task
         return context
