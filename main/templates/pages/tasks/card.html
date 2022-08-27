@@ -1,4 +1,4 @@
-<a href="#" class="text-decoration-none">
+<a href="{% url 'task' pk=item.id %}" class="text-decoration-none">
     <div class="card border border-2 border-danger rounded-top rounded-0 m-4 pb-3" style="background-color: #1E0400; width: 20vw; height: 20vh">
         <div class="card-header text-danger text-center bg-dark">
             <strong>{{ item.title }}</strong>

@@ -5,7 +5,7 @@ from django.contrib.auth import logout, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic import DetailView, UpdateView, ListView, CreateView
@@ -120,13 +120,30 @@ class TaskListPage(LoginRequiredMixin, ListView):
     """
     Страница со списком задач
     """
-    template_name = 'pages/tasks/index.html'
+    template_name = 'pages/tasks/list.html'
     model = Task
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)
         context['pagename'] = 'Список задач'
         context['tasks'] = Task.get_active()
+        return context
+
+
+class TaskPage(LoginRequiredMixin, DetailView):
+    """
+    Страница задачи
+    """
+    model = Task
+    template_name = 'pages/tasks/index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        task = self.object
+        if not task.active:
+            return Http404
+        context['pagename'] = task.title
+        context['task'] = task
         return context
 
 
