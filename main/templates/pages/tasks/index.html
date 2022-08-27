@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-    <input id="task_id" type="hidden" name="task_id" value="{{ task.id }}">
+    <input id="task_id" type="hidden" value="{{ task.id }}">
     <div class="row m-0">
         <div class="col text-white">
             <h3 class="text-center text-danger">{{ pagename }}</h3>
@@ -16,8 +16,8 @@
                 <button class="btn btn-success text-right ms-3 position-absolute">Загрузить</button>
             </div>
 
-            <div class="mx-auto text-center my-4 d-flex" style="width: 80vw">
-                <input id="answer" class="form-control" type="text" placeholder="Ответ...">
+            <div id="input_form" class="mx-auto text-center my-4 d-flex" style="width: 80vw">
+                <input required id="answer" onchange="send_answer()" class="form-control" type="text" placeholder="Ответ...">
                 <button class="ms-2 btn btn-primary" onclick="send_answer()">Проверить</button>
             </div>
 

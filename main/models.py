@@ -57,6 +57,16 @@ class Task(models.Model):
     active = models.BooleanField(default=True)
 
     @staticmethod
+    def get_by_id(id):
+        """
+
+        """
+        try:
+            return Task.objects.get(id=id)
+        except Task.DoesNotExist:
+            return None
+
+    @staticmethod
     def get_active():
         """
         Получение только активных задач

@@ -25,6 +25,7 @@ urlpatterns = [
     path('', views.index_page, name='index'),
     path('accounts/', include('stego.urls.accounts')),
     path('tasks/', include('stego.urls.tasks')),
+    path('api/', include('stego.urls.api')),
 ]
 
 if settings.DEBUG:
