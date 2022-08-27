@@ -1,6 +1,8 @@
 {% extends "base/base.html" %}
+{% load static %}
 
 {% block content %}
+    <input id="task_id" type="hidden" name="task_id" value="{{ task.id }}">
     <div class="row m-0">
         <div class="col text-white">
             <h3 class="text-center text-danger">{{ pagename }}</h3>
@@ -10,14 +12,14 @@
             </div>
 
             <div class="mx-auto text-center" style="width: 80vw">
-                <img src="{{ task.image.url }}" alt="Изображение с текстом">
+                <img src="{{ task.image.url }}" style="max-width: 80vw" alt="Изображение с текстом">
                 <button class="btn btn-success text-right ms-3 position-absolute">Загрузить</button>
             </div>
 
             <div class="mx-auto text-center my-4" style="width: 80vw">
-                <form class="d-flex" action="{% url 'task' pk=task.id %}" method="POST">
-                    <input class="form-control" type="text" placeholder="Ответ...">
-                    <input class="ms-2 btn btn-primary" type="submit" value="Проверить">
+                <form class="d-flex">
+                    <input id="answer" class="form-control" type="text" placeholder="Ответ...">
+                    <input class="ms-2 btn btn-primary" type="submit" value="Проверить" onclick="send_answer()">
                 </form>
             </div>
 
@@ -26,4 +28,8 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'js/task/main.js' %}"></script>
 {% endblock %}
