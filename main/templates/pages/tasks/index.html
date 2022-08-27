@@ -14,6 +14,13 @@
                 <button class="btn btn-success text-right ms-3 position-absolute">Загрузить</button>
             </div>
 
+            <div class="mx-auto text-center my-4" style="width: 80vw">
+                <form class="d-flex" action="{% url 'task' pk=task.id %}" method="POST">
+                    <input class="form-control" type="text" placeholder="Ответ...">
+                    <input class="ms-2 btn btn-primary" type="submit" value="Проверить">
+                </form>
+            </div>
+
             <div class="mx-auto mt-4" style="width: 80vw">
                 <button class="btn btn-secondary" onclick="history.back()">Назад</button>
             </div>

@@ -12,6 +12,7 @@ from django.views.generic import DetailView, UpdateView, ListView, CreateView
 
 from main.forms import UserSettingsEditForm, CreateTaskForm
 from main.models import UserSettings, Task
+from stego.settings import BASE_URL
 
 
 @login_required()
@@ -42,7 +43,8 @@ class CustomLoginView(LoginView):
 
 def index_page(request):
     context = {
-        'pagename': 'Главная'
+        'pagename': 'Главная',
+        'BASE_URL': BASE_URL
     }
     return render(request, 'pages/index/index.html', context)
 
@@ -53,6 +55,9 @@ class ProfilePage(LoginRequiredMixin, DetailView):
     """
     model = get_user_model()
     template_name = 'pages/profile/index.html'
+    extra_context = {
+        'BASE_URL': BASE_URL
+    }
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -72,6 +77,9 @@ class ProfileSettingsPage(LoginRequiredMixin, UpdateView):
     model = get_user_model()
     fields = ['first_name', 'last_name', 'email']
     template_name = 'pages/profile/settings/index.html'
+    extra_context = {
+        'BASE_URL': BASE_URL
+    }
 
     def get_success_url(self) -> str:
         """
@@ -122,6 +130,9 @@ class TaskListPage(LoginRequiredMixin, ListView):
     """
     template_name = 'pages/tasks/list.html'
     model = Task
+    extra_context = {
+        'BASE_URL': BASE_URL
+    }
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)
@@ -136,6 +147,9 @@ class TaskPage(LoginRequiredMixin, DetailView):
     """
     model = Task
     template_name = 'pages/tasks/index.html'
+    extra_context = {
+        'BASE_URL': BASE_URL
+    }
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -154,6 +168,9 @@ class CreateTaskPage(LoginRequiredMixin, CreateView):
     model = Task
     fields = ['author', 'title', 'description', 'image', 'answer', 'points', 'group']
     template_name = 'pages/tasks/create.html'
+    extra_context = {
+        'BASE_URL': BASE_URL
+    }
 
     def get_success_url(self):
         """
