@@ -16,10 +16,16 @@
                 <button class="btn btn-success text-right ms-3 position-absolute">Загрузить</button>
             </div>
 
-            <div id="input_form" class="mx-auto text-center my-4 d-flex" style="width: 80vw">
-                <input required id="answer" onchange="send_answer()" class="form-control" type="text" placeholder="Ответ...">
-                <button class="ms-2 btn btn-primary" onclick="send_answer()">Проверить</button>
-            </div>
+            {% if not done %}
+                <div id="input_form" class="mx-auto text-center my-4 d-flex" style="width: 80vw">
+                    <input required id="answer" onchange="send_answer()" class="form-control" type="text" placeholder="Ответ...">
+                    <button class="ms-2 btn btn-primary" onclick="send_answer()">Проверить</button>
+                </div>
+            {% else %}
+                <div class="mx-auto text-center my-4" style="width: 80vw">
+                    <p class="text-success fs-4">Задача уже решена</p>
+                </div>
+            {% endif %}
 
             <div class="mx-auto mt-4" style="width: 80vw">
                 <button class="btn btn-secondary" onclick="history.back()">Назад</button>

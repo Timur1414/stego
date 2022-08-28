@@ -16,6 +16,8 @@ def check_answer(request):
     id = request.GET.get('id', -1)
     task = Task.get_by_id(id)
     right_answer = task.answer
+    if right_answer == user_answer:
+        task.set_done(request.user)
     return JsonResponse({
         'is_ok': True if right_answer == user_answer else False
     })

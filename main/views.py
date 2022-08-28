@@ -137,7 +137,8 @@ class TaskListPage(LoginRequiredMixin, ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)
         context['pagename'] = 'Список задач'
-        context['tasks'] = Task.get_active()
+        tasks = Task.get_active()
+        context['tasks'] = [[task, task.is_done(self.request.user)] for task in tasks]
         return context
 
 
@@ -158,6 +159,7 @@ class TaskPage(LoginRequiredMixin, DetailView):
             raise Http404
         context['pagename'] = task.title
         context['task'] = task
+        context['done'] = task.is_done(self.request.user)
         return context
 
 
