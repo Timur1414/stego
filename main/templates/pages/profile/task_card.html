@@ -1,9 +1,12 @@
 <a class="text-decoration-none text-white" href="{% url 'task' pk=item.0.id %}">
-    <div class="bg-danger p-0 my-4 d-flex rounded">
-        <div class="flex-grow-1 border-end p-3 fs-5">
+    <div class="bg-danger p-0 my-4 d-flex align-self-center rounded">
+        <div class="border-end">
+            <img class="rounded m-1" style="max-height: 7vh; max-width: 10vw" src="{{ item.0.author.usersettings.avatar.url }}">
+        </div>
+        <div class="flex-grow-1 border-start border-end p-4 fs-5" style="vertical-align: middle;">
             <strong>{{ item.0.title }}</strong>
         </div>
-        <div class="border-start p-3 fs-5">
+        <div class="border-start p-4 fs-5">
             Кол-во прохождений: <strong>{{ item.1 }}</strong>
         </div>
     </div>

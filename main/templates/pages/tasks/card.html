@@ -4,7 +4,7 @@
                     border-success
                 {% else %}
                     border-danger
-                {% endif %}" style="background-color: #1E0400; width: 20vw; height: 20vh">
+                {% endif %}" style="background-color: #1E0400; width: 20vw; height: 30vh">
         <div class="card-header text-center bg-dark
                     {% if item.1 %}
                         text-success
@@ -12,8 +12,9 @@
                         text-danger
                     {% endif %}">
             <strong>{{ item.0.title }}</strong>
+            <p class="text-white m-0 p-0">Автор: <strong>{{ item.0.author }}</strong></p>
         </div>
-        <div class="card-body text-white" style="background-color: #1E0400; overflow: hidden">
+        <div class="card-body text-white text-break" style="background-color: #1E0400; overflow: hidden">
             {{ item.0.description }}
         </div>
     </div>

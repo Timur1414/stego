@@ -12,6 +12,10 @@
                             text-danger
                         {% endif %}">{{ pagename }}</h3>
 
+            <div class="text-center">
+                Автор: <strong><a class="link-light" href="{% url 'profile' pk=task.author.id %}">{{ task.author }}</a></strong>
+            </div>
+
             <div class="border border-3 rounded p-4 mx-auto my-5 overflow-auto
                         {% if done %}
                             border-success
