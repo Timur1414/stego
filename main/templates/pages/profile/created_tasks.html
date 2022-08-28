@@ -3,8 +3,13 @@
         <strong>Созданные задачи</strong>
     </div>
     <div class="card-body px-5">
-        <p>{только созданные таски}</p>
-        <br>
-        <a class="link-danger" href="#">Смотреть все</a>
+        {% for item in created_tasks %}
+            {% include "pages/profile/task_card.html" %}
+        {% empty %}
+            <p>Пользователь ещё не создал ни одной задачи</p>
+        {% endfor %}
+        {% if created_tasks %}
+            <a class="link-danger" href="#">Смотреть все</a>
+        {% endif %}
     </div>
 </div>

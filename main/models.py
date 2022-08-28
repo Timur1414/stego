@@ -68,6 +68,13 @@ class Task(models.Model):
     active = models.BooleanField(default=True)
     done = models.ManyToManyField(to=get_user_model())
 
+    @staticmethod
+    def get_tasks_of_user(user: get_user_model()):
+        """
+        Получение задач, которые создал пользователь
+        """
+        return Task.objects.filter(author=user)
+
     def get_done_count(self):
         """
         Получение количества пользователей, решивших задачу
