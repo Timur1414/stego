@@ -1,2 +1,51 @@
 {% extends "base/base.html" %}
+{% load static %}
 
+{% block content %}
+    <input id="task_id" type="hidden" value="{{ task.id }}">
+    <div class="row m-0">
+        <div class="col text-white">
+            <h3 class="text-center
+                        {% if done %}
+                            text-success
+                        {% else %}
+                            text-danger
+                        {% endif %}">{{ pagename }}</h3>
+
+            <div class="border border-3 rounded p-4 mx-auto my-5 overflow-auto
+                        {% if done %}
+                            border-success
+                        {% else %}
+                            border-danger
+                        {% endif %}" style="width: 80vw">
+                {{ task.description }}
+            </div>
+
+            <div class="mx-auto text-center" style="width: 80vw">
+                <img src="{{ task.image.url }}" style="max-width: 80vw" alt="Изображение с текстом">
+                <button class="btn btn-success text-right ms-3 position-absolute">Загрузить</button>
+            </div>
+
+            {% if not done %}
+                <div id="input_form" class="mx-auto text-center my-4" style="width: 80vw">
+                    <div class="d-flex">
+                        <input required id="answer" onchange="send_answer()" class="form-control" type="text" placeholder="Ответ...">
+                        <button class="ms-2 btn btn-primary" onclick="send_answer()">Проверить</button>
+                    </div>
+                </div>
+            {% else %}
+                <div class="mx-auto text-center my-4" style="width: 80vw">
+                    <p class="text-success fs-4">Задача уже решена</p>
+                </div>
+            {% endif %}
+
+            <div class="mx-auto mt-4" style="width: 80vw">
+                <button class="btn btn-secondary" onclick="history.back()">Назад</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'js/task/main.js' %}"></script>
+{% endblock %}
