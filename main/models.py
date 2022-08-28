@@ -68,6 +68,18 @@ class Task(models.Model):
     active = models.BooleanField(default=True)
     done = models.ManyToManyField(to=get_user_model())
 
+    @staticmethod
+    def get_done_tasks(user: get_user_model()):
+        """
+        Получение сделаных задач
+        """
+        tasks = Task.get_active()
+        result = []
+        for task in tasks:
+            if user in task.done.all():
+                result.append(task)
+        return result
+
     def is_done(self, user: get_user_model()):
         """
         Проверка на то, сделана ли задача

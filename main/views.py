@@ -67,6 +67,7 @@ class ProfilePage(LoginRequiredMixin, DetailView):
         context['username'] = user.username
         context['pagename'] = user.username
         context['avatar'] = usersettings.avatar
+        context['history'] = Task.get_done_tasks(self.object)[:10]
         return context
 
 
