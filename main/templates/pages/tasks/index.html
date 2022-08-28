@@ -17,9 +17,11 @@
             </div>
 
             {% if not done %}
-                <div id="input_form" class="mx-auto text-center my-4 d-flex" style="width: 80vw">
-                    <input required id="answer" onchange="send_answer()" class="form-control" type="text" placeholder="Ответ...">
-                    <button class="ms-2 btn btn-primary" onclick="send_answer()">Проверить</button>
+                <div id="input_form" class="mx-auto text-center my-4" style="width: 80vw">
+                    <div class="d-flex">
+                        <input required id="answer" onchange="send_answer()" class="form-control" type="text" placeholder="Ответ...">
+                        <button class="ms-2 btn btn-primary" onclick="send_answer()">Проверить</button>
+                    </div>
                 </div>
             {% else %}
                 <div class="mx-auto text-center my-4" style="width: 80vw">

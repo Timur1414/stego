@@ -19,6 +19,8 @@ def check_answer(request):
     if right_answer == user_answer:
         task.set_done(request.user)
     return JsonResponse({
-        'is_ok': True if right_answer == user_answer else False
+        'is_ok': True if right_answer == user_answer else False,
+        'message': '<p class="text-success fs-4">Правильный ответ</p>'
+        if right_answer == user_answer else
+        '<p class="text-danger fs-4">Неправильный ответ</p>'
     })
-
