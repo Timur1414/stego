@@ -67,7 +67,10 @@ class ProfilePage(LoginRequiredMixin, DetailView):
         context['username'] = user.username
         context['pagename'] = user.username
         context['avatar'] = usersettings.avatar
-        context['history'] = Task.get_done_tasks(self.object)[:10]
+        tasks_to_history = Task.get_done_tasks(self.object)[:10]
+        context['tasks_to_history'] = [
+            [task, task.get_done_count()] for task in tasks_to_history
+        ]
         return context
 
 
@@ -139,7 +142,9 @@ class TaskListPage(LoginRequiredMixin, ListView):
         context = super().get_context_data(object_list=object_list, **kwargs)
         context['pagename'] = 'Список задач'
         tasks = Task.get_active()
-        context['tasks'] = [[task, task.is_done(self.request.user)] for task in tasks]
+        context['tasks'] = [
+            [task, task.is_done(self.request.user)] for task in tasks
+        ]
         return context
 
 
@@ -161,6 +166,7 @@ class TaskPage(LoginRequiredMixin, DetailView):
         context['pagename'] = task.title
         context['task'] = task
         context['done'] = task.is_done(self.request.user)
+        context['done_count'] = task.get_done_count()
         return context
 
 

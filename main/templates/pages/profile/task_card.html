@@ -1,0 +1,10 @@
+<a class="text-decoration-none text-white" href="{% url 'task' pk=item.0.id %}">
+    <div class="bg-danger p-0 my-4 d-flex rounded">
+        <div class="flex-grow-1 border-end p-3 fs-5">
+            <strong>{{ item.0.title }}</strong>
+        </div>
+        <div class="border-start p-3 fs-5">
+            Кол-во прохождений: <strong>{{ item.1 }}</strong>
+        </div>
+    </div>
+</a>

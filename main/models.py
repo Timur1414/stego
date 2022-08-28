@@ -68,6 +68,12 @@ class Task(models.Model):
     active = models.BooleanField(default=True)
     done = models.ManyToManyField(to=get_user_model())
 
+    def get_done_count(self):
+        """
+        Получение количества пользователей, решивших задачу
+        """
+        return self.done.count()
+
     @staticmethod
     def get_done_tasks(user: get_user_model()):
         """
