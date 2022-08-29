@@ -34,4 +34,5 @@ urlpatterns = [
     path('', include('django.contrib.auth.urls')),
     path('profile/<int:pk>/', views.ProfilePage.as_view(), name='profile'),
     path('profile/settings/', views.ProfileSettingsPage.as_view(), name='profile_settings'),
+    path('profile/history/', views.HistoryPage.as_view(), name='history'),
 ]

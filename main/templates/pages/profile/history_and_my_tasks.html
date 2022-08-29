@@ -13,7 +13,7 @@
                     <p>Вы ещё не решили ни одной задачи</p>
                 {% endfor %}
                 {% if count_of_tasks_to_history > 5 %}
-                    <a class="link-danger mt-3" href="#">Смотреть все</a>
+                    <a class="link-danger mt-3" href="{% url 'history' %}">Смотреть все</a>
                 {% endif %}
             </div>
         </div>

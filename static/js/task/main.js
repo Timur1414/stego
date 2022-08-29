@@ -13,6 +13,7 @@ async function send_answer() {
     let data = await response.json()
     if (data.is_ok) {
         console.log("yes")
+        done_count.innerText = Number(done_count.innerText) + 1
         input_form.innerHTML = data.message
     }
     else {

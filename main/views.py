@@ -137,6 +137,32 @@ class ProfileSettingsPage(LoginRequiredMixin, UpdateView):
         return context
 
 
+class HistoryPage(LoginRequiredMixin, DetailView):
+    """
+    Страница с историей выполненных задач
+    """
+    template_name = 'pages/profile/history/index.html'
+    model = get_user_model()
+    extra_context = {
+        'BASE_URL': BASE_URL
+    }
+
+    def get_object(self, queryset=None):
+        """
+        Получение user'а
+        """
+        return self.request.user
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['pagename'] = 'История'
+        tasks_to_history = Task.get_done_tasks(self.object)
+        context['tasks_to_history'] = [
+            [task, task.get_done_count()] for task in tasks_to_history
+        ]
+        return context
+
+
 class TaskListPage(LoginRequiredMixin, ListView):
     """
     Страница со списком задач
