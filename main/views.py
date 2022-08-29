@@ -108,9 +108,10 @@ class ProfileSettingsPage(LoginRequiredMixin, UpdateView):
         """
         return reverse("profile", kwargs={'pk': self.object.id})
 
-    def get_object(self, queryset=None) -> get_user_model():
+    def get_object(self, queryset=None) -> get_user_model:
         """
         Получение user'а
+        Берётся активный в данный момент пользователь, чтобы не просматривать чужие настройки
         """
         return self.request.user
 
@@ -142,30 +143,26 @@ class ProfileSettingsPage(LoginRequiredMixin, UpdateView):
         return context
 
 
-class HistoryPage(LoginRequiredMixin, DetailView):
+class HistoryPage(LoginRequiredMixin, ListView):
     """
     Страница с историей выполненных задач
     """
     template_name = 'pages/profile/history/index.html'
     model = get_user_model()
+    context_object_name = 'context'
     extra_context = {
-        'BASE_URL': BASE_URL
+        'BASE_URL': BASE_URL,
+        'pagename': 'История'
     }
 
-    def get_object(self, queryset=None):
+    def get_queryset(self):
         """
-        Получение user'а
+        Получение списка выполненных задач
         """
-        return self.request.user
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['pagename'] = 'История'
-        tasks_to_history = Task.get_done_tasks(self.object)
-        context['tasks_to_history'] = [
+        tasks_to_history = Task.get_done_tasks(self.request.user)
+        return [
             [task, task.get_done_count()] for task in tasks_to_history
         ]
-        return context
 
 
 class CreatedTasksPage(LoginRequiredMixin, DetailView):

@@ -5,7 +5,7 @@
         <div class="col text-white">
             <h3 class="text-center text-danger">История</h3>
 
-            {% for item in tasks_to_history %}
+            {% for item in context %}
                 {% include "pages/profile/task_card.html" %}
             {% empty %}
                 <p>Вы ещё не решили ни одной задачи</p>
