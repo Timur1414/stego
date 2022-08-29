@@ -22,7 +22,7 @@ from stego import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index_page, name='index'),
+    path('', views.IndexPage.as_view(), name='index'),
     path('accounts/', include('stego.urls.accounts')),
     path('tasks/', include('stego.urls.tasks')),
     path('api/', include('stego.urls.api')),

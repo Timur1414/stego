@@ -8,7 +8,7 @@ from django.contrib.auth.views import LoginView
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from django.views.generic import DetailView, UpdateView, ListView, CreateView
+from django.views.generic import DetailView, UpdateView, ListView, CreateView, TemplateView
 
 from main.forms import UserSettingsEditForm, CreateTaskForm
 from main.models import UserSettings, Task
@@ -41,12 +41,15 @@ class CustomLoginView(LoginView):
         return reverse('profile', kwargs={'pk': self.request.user.id})
 
 
-def index_page(request):
-    context = {
-        'pagename': 'Главная',
-        'BASE_URL': BASE_URL
+class IndexPage(TemplateView):
+    """
+    Лендинг
+    """
+    template_name = 'pages/index/index.html'
+    extra_context = {
+        'BASE_URL': BASE_URL,
+        'pagename': 'Главная'
     }
-    return render(request, 'pages/index/index.html', context)
 
 
 class ProfilePage(LoginRequiredMixin, DetailView):
