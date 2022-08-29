@@ -62,22 +62,23 @@ class ProfilePage(LoginRequiredMixin, DetailView):
         'BASE_URL': BASE_URL
     }
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs) -> dict:
+        """
+        Формирование словаря для наполнения страницы
+        """
         context = super().get_context_data(**kwargs)
-        user = self.object
-        usersettings = UserSettings.get_usersettings_by_user(user)
-        context['user'] = user
-        context['username'] = user.username
-        context['pagename'] = user.username
+        usersettings = UserSettings.get_usersettings_by_user(self.object)
+        context['user'] = self.object
+        context['pagename'] = self.object.username
         context['avatar'] = usersettings.avatar
-        if user == self.request.user:
+        if self.object == self.request.user:
             tasks_to_history = Task.get_done_tasks(self.object)
             context['count_of_tasks_to_history'] = len(tasks_to_history)
             tasks_to_history = tasks_to_history[:5]
             context['tasks_to_history'] = [
                 [task, task.get_done_count()] for task in tasks_to_history
             ]
-        created_tasks = Task.get_tasks_of_user(user)
+        created_tasks = Task.get_tasks_of_user(self.object)
         context['count_of_created_tasks'] = len(created_tasks)
         created_tasks = created_tasks[:5]
         context['created_tasks'] = [
