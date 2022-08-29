@@ -135,3 +135,18 @@ class Task(models.Model):
         Получение задач по названию
         """
         return Task.objects.filter(active=True, title=title)
+
+
+class Complaint(models.Model):
+    """
+    Модель жалобы
+    Состояния:
+        0 - на рассмотрении
+        1 - принято
+        2 - отказано
+    """
+    author = models.ForeignKey(to=get_user_model(), on_delete=models.CASCADE)
+    task = models.ForeignKey(to=Task, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+    description = models.TextField()
+    state = models.IntegerField(default=0)

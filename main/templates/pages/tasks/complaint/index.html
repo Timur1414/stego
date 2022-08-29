@@ -1,0 +1,19 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+    <div class="row m-0">
+        <div class="col text-white">
+            <h3 class="text-center text-danger">Жалоба на <a class="link-light" href="#">{task}</a></h3>
+
+            <div class="border border-3 rounded p-4 mx-auto my-5 overflow-auto" style="width: 80vw">
+                {description}
+            </div>
+
+            <form action="." method="POST">
+                {% csrf_token %}
+                <input class="btn btn-success" type="submit" value="Принять">
+                <input class="btn btn-danger" type="submit" value="Отклонить">
+            </form>
+        </div>
+    </div>
+{% endblock %}
