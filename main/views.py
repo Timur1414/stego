@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.http import HttpResponse, Http404
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.urls import reverse
 from django.views.generic import DetailView, UpdateView, ListView, CreateView, TemplateView
 
@@ -95,7 +95,8 @@ class ProfileSettingsPage(LoginRequiredMixin, UpdateView):
     fields = ['first_name', 'last_name', 'email']
     template_name = 'pages/profile/settings/index.html'
     extra_context = {
-        'BASE_URL': BASE_URL
+        'BASE_URL': BASE_URL,
+        'pagename': 'Настройки'
     }
 
     def get_success_url(self) -> str:
@@ -107,7 +108,7 @@ class ProfileSettingsPage(LoginRequiredMixin, UpdateView):
         """
         return reverse("profile", kwargs={'pk': self.object.id})
 
-    def get_object(self, queryset=None):
+    def get_object(self, queryset=None) -> get_user_model():
         """
         Получение user'а
         """
@@ -132,11 +133,11 @@ class ProfileSettingsPage(LoginRequiredMixin, UpdateView):
             usersettings_form.save()
         return super().post(request, *args, **kwargs)
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs) -> dict:
+        """
+        Формирование словаря для наполнения страницы
+        """
         context = super().get_context_data(**kwargs)
-        context['pagename'] = 'Настройки'
-        user = self.object
-        usersettings = UserSettings.objects.get(user=user)
         context['settings_form'] = UserSettingsEditForm(instance=self.request.user.usersettings)
         return context
 
