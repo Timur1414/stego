@@ -174,12 +174,15 @@ class CreatedTasksPage(LoginRequiredMixin, DetailView):
     model = get_user_model()
     template_name = 'pages/profile/created_tasks/index.html'
     extra_context = {
-        'BASE_URL': BASE_URL
+        'BASE_URL': BASE_URL,
+        'pagename': 'Созданные задачи'
     }
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs) -> dict:
+        """
+        Формирование словаря для наполнения страницы
+        """
         context = super().get_context_data(**kwargs)
-        context['pagename'] = 'Созданные задачи'
         context['user'] = self.object
         created_tasks = Task.get_tasks_of_user(self.object)
         context['created_tasks'] = [
