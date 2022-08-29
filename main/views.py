@@ -197,18 +197,20 @@ class TaskListPage(LoginRequiredMixin, ListView):
     """
     template_name = 'pages/tasks/list.html'
     model = Task
+    context_object_name = 'context'
     extra_context = {
-        'BASE_URL': BASE_URL
+        'BASE_URL': BASE_URL,
+        'pagename': 'Список задач'
     }
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(object_list=object_list, **kwargs)
-        context['pagename'] = 'Список задач'
+    def get_queryset(self) -> List:
+        """
+        Получение активных задач
+        """
         tasks = Task.get_active()
-        context['tasks'] = [
+        return [
             [task, task.is_done(self.request.user)] for task in tasks
         ]
-        return context
 
 
 class TaskPage(LoginRequiredMixin, DetailView):
