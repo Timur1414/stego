@@ -223,15 +223,17 @@ class TaskPage(LoginRequiredMixin, DetailView):
         'BASE_URL': BASE_URL
     }
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs) -> dict:
+        """
+        Формирование словаря для наполнения страницы
+        """
         context = super().get_context_data(**kwargs)
-        task = self.object
-        if not task.active:
+        if not self.object.active:
             raise Http404
-        context['pagename'] = task.title
-        context['task'] = task
-        context['done'] = task.is_done(self.request.user)
-        context['done_count'] = task.get_done_count()
+        context['pagename'] = self.object.title
+        context['task'] = self.object
+        context['done'] = self.object.is_done(self.request.user)
+        context['done_count'] = self.object.get_done_count()
         return context
 
 
