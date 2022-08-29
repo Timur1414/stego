@@ -35,4 +35,5 @@ urlpatterns = [
     path('profile/<int:pk>/', views.ProfilePage.as_view(), name='profile'),
     path('profile/settings/', views.ProfileSettingsPage.as_view(), name='profile_settings'),
     path('profile/history/', views.HistoryPage.as_view(), name='history'),
+    path('profile/<int:pk>/created_tasks/', views.CreatedTasksPage.as_view(), name='created_tasks'),
 ]

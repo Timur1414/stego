@@ -32,7 +32,7 @@
                     <p>Вы ещё не создали ни одной задачи</p>
                 {% endfor %}
                 {% if count_of_created_tasks > 5 %}
-                    <a class="link-danger" href="#">Смотреть все</a>
+                    <a class="link-danger" href="{% url 'created_tasks' pk=user.id %}">Смотреть все</a>
                 {% endif %}
             </div>
         </div>

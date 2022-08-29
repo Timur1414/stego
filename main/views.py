@@ -163,6 +163,27 @@ class HistoryPage(LoginRequiredMixin, DetailView):
         return context
 
 
+class CreatedTasksPage(LoginRequiredMixin, DetailView):
+    """
+    Страница со списком задач, созданных пользователем
+    """
+    model = get_user_model()
+    template_name = 'pages/profile/created_tasks/index.html'
+    extra_context = {
+        'BASE_URL': BASE_URL
+    }
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['pagename'] = 'Созданные задачи'
+        context['user'] = self.object
+        created_tasks = Task.get_tasks_of_user(self.object)
+        context['created_tasks'] = [
+            [task, task.get_done_count()] for task in created_tasks
+        ]
+        return context
+
+
 class TaskListPage(LoginRequiredMixin, ListView):
     """
     Страница со списком задач
