@@ -6,10 +6,10 @@
             <h3 class="text-center text-danger">Список жалоб</h3>
 
             <div class="mt-5 d-flex justify-content-around flex-wrap">
-                {% for item in complaints %}
+                {% for item in context %}
                     {% include "pages/tasks/complaints/card.html" %}
                 {% empty %}
-                    <p>Жалоб нет</p> <br>
+                    <p>Жалоб нет</p>
                 {% endfor %}
             </div>
         </div>

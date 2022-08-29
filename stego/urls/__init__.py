@@ -25,6 +25,7 @@ urlpatterns = [
     path('', views.IndexPage.as_view(), name='index'),
     path('accounts/', include('stego.urls.accounts')),
     path('tasks/', include('stego.urls.tasks')),
+    path('complaints/', include('stego.urls.complaints')),
     path('api/', include('stego.urls.api')),
 ]
 

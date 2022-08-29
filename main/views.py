@@ -13,7 +13,7 @@ from django.urls import reverse
 from django.views.generic import DetailView, UpdateView, ListView, CreateView, TemplateView
 
 from main.forms import UserSettingsEditForm, CreateTaskForm
-from main.models import UserSettings, Task
+from main.models import UserSettings, Task, Complaint
 from stego.settings import BASE_URL
 
 
@@ -262,3 +262,24 @@ class CreateTaskPage(LoginRequiredMixin, CreateView):
         context = super().get_context_data(**kwargs)
         context['form'] = CreateTaskForm(initial={'author': self.request.user})
         return context
+
+
+class ComplaintListPage(LoginRequiredMixin, ListView):
+    """
+    Страница со списком жалоб
+    Доступна только администраторам
+    """
+    template_name = 'pages/tasks/complaints/list.html'
+    context_object_name = 'context'
+    extra_context = {
+        'BASE_URL': BASE_URL,
+        'pagename': 'Список жалоб'
+    }
+
+    def get_queryset(self) -> List:
+        """
+        Получение жалоб и проверка на администратора
+        """
+        if not self.request.user.is_staff:
+            raise Http404
+        return Complaint.get_active()
