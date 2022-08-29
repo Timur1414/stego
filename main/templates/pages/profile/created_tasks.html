@@ -8,7 +8,7 @@
         {% empty %}
             <p>Пользователь ещё не создал ни одной задачи</p>
         {% endfor %}
-        {% if created_tasks %}
+        {% if count_of_created_tasks > 5 %}
             <a class="link-danger" href="#">Смотреть все</a>
         {% endif %}
     </div>

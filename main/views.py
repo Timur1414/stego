@@ -68,11 +68,15 @@ class ProfilePage(LoginRequiredMixin, DetailView):
         context['pagename'] = user.username
         context['avatar'] = usersettings.avatar
         if user == self.request.user:
-            tasks_to_history = Task.get_done_tasks(self.object)[:5]
+            tasks_to_history = Task.get_done_tasks(self.object)
+            context['count_of_tasks_to_history'] = len(tasks_to_history)
+            tasks_to_history = tasks_to_history[:5]
             context['tasks_to_history'] = [
                 [task, task.get_done_count()] for task in tasks_to_history
             ]
-        created_tasks = Task.get_tasks_of_user(user)[:5]
+        created_tasks = Task.get_tasks_of_user(user)
+        context['count_of_created_tasks'] = len(created_tasks)
+        created_tasks = created_tasks[:5]
         context['created_tasks'] = [
             [task, task.get_done_count()] for task in created_tasks
         ]
@@ -190,7 +194,7 @@ class CreateTaskPage(LoginRequiredMixin, CreateView):
         """
         Получение перенаправляющей ссылки при успешном создании задачи
         """
-        return reverse('task_list')
+        return reverse('task', kwargs={'pk': self.object.id})
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

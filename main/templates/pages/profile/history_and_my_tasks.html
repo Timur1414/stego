@@ -12,7 +12,7 @@
                 {% empty %}
                     <p>Вы ещё не решили ни одной задачи</p>
                 {% endfor %}
-                {% if tasks_to_history %}
+                {% if count_of_tasks_to_history > 5 %}
                     <a class="link-danger mt-3" href="#">Смотреть все</a>
                 {% endif %}
             </div>
@@ -31,7 +31,7 @@
                 {% empty %}
                     <p>Вы ещё не создали ни одной задачи</p>
                 {% endfor %}
-                {% if created_tasks %}
+                {% if count_of_created_tasks > 5 %}
                     <a class="link-danger" href="#">Смотреть все</a>
                 {% endif %}
             </div>

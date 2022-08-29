@@ -56,4 +56,7 @@ class CreateTaskForm(forms.ModelForm):
         widgets = {
             'author': forms.HiddenInput(),
             'image': ClearableFileInput(attrs={'class': 'form-control'}),
+            'title': forms.TextInput(attrs={'autocomplete': 'off'}),
+            'answer': forms.TextInput(attrs={'autocomplete': 'off'}),
+            'group': forms.TextInput(attrs={'autocomplete': 'off'}),
         }
