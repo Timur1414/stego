@@ -1,6 +1,8 @@
 """
 View проекта
 """
+from typing import List
+
 from django.contrib.auth import logout, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -155,7 +157,7 @@ class HistoryPage(LoginRequiredMixin, ListView):
         'pagename': 'История'
     }
 
-    def get_queryset(self):
+    def get_queryset(self) -> List:
         """
         Получение списка выполненных задач
         """
