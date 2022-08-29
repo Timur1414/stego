@@ -245,17 +245,20 @@ class CreateTaskPage(LoginRequiredMixin, CreateView):
     fields = ['author', 'title', 'description', 'image', 'answer', 'points', 'group']
     template_name = 'pages/tasks/create.html'
     extra_context = {
-        'BASE_URL': BASE_URL
+        'BASE_URL': BASE_URL,
+        'pagename': 'Создание задачи'
     }
 
-    def get_success_url(self):
+    def get_success_url(self) -> str:
         """
         Получение перенаправляющей ссылки при успешном создании задачи
         """
         return reverse('task', kwargs={'pk': self.object.id})
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs) -> dict:
+        """
+        Формирование словаря для наполнения страницы
+        """
         context = super().get_context_data(**kwargs)
-        context['pagename'] = 'Создание задачи'
         context['form'] = CreateTaskForm(initial={'author': self.request.user})
         return context
