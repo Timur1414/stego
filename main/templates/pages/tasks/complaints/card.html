@@ -1,11 +1,11 @@
 <a class="text-decoration-none" href="#">
     <div class="card border border-2 border-danger rounded-top rounded-0 m-4 pb-3" style="background-color: #1E0400; width: 20vw; height: 30vh">
         <div class="card-header text-center bg-dark text-danger">
-            <strong>{task.title}</strong>
-            <p class="text-white m-0 p-0">Автор: <strong>{ task.author }</strong></p>
+            <strong>{{ item.task.title }}</strong>
+            <p class="text-white m-0 p-0">Автор задачи: <strong>{{ item.task.author }}</strong></p>
         </div>
         <div class="card-body text-white text-break" style="background-color: #1E0400; overflow: hidden">
-            {complaint.description}
+            {{ item.description }}
         </div>
     </div>
 </a>
