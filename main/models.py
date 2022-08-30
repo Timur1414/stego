@@ -169,6 +169,9 @@ class Complaint(models.Model):
         self.task.active = False
         self.save()
         self.task.save()
+        complaints = Complaint.get_complaints_of_task(self.task)
+        for complaint in complaints:
+            complaint.dismiss()
 
     def dismiss(self):
         """
@@ -176,6 +179,13 @@ class Complaint(models.Model):
         """
         self.state = 2
         self.save()
+
+    @staticmethod
+    def get_complaints_of_task(task: Task, state: int = 0):
+        """
+        Получение всех жалоб на задачу
+        """
+        return Complaint.objects.filter(task=task, state=state)
 
     @staticmethod
     def get_active():
