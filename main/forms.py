@@ -5,7 +5,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.forms import ClearableFileInput, TextInput, EmailInput
 
-from main.models import UserSettings, Task
+from main.models import UserSettings, Task, Complaint
 
 
 class UserEditForm(forms.ModelForm):
@@ -59,4 +59,22 @@ class CreateTaskForm(forms.ModelForm):
             'title': forms.TextInput(attrs={'autocomplete': 'off'}),
             'answer': forms.TextInput(attrs={'autocomplete': 'off'}),
             'group': forms.TextInput(attrs={'autocomplete': 'off'}),
+        }
+
+
+class CreateComplaintForm(forms.ModelForm):
+    """
+    Форма создания жалобы
+    """
+
+    class Meta:
+        model = Complaint
+        fields = ('author', 'task', 'description')
+        labels = {
+            'description': 'Причина'
+        }
+        widgets = {
+            'author': forms.HiddenInput(),
+            'task': forms.HiddenInput(),
+            'description': forms.TextInput(attrs={'autocomplete': 'off'})
         }

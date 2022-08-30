@@ -283,3 +283,19 @@ class ComplaintListPage(LoginRequiredMixin, ListView):
         if not self.request.user.is_staff:
             raise Http404
         return Complaint.get_active()
+
+
+class CreateComplaintPage(LoginRequiredMixin, CreateView):
+    """
+    Страница создания жалобы
+    """
+    model = Complaint
+    fields = ['author', 'task', 'description']
+    template_name = 'pages/tasks/complaints/create.html'
+    extra_context = {
+        'BASE_URL': BASE_URL,
+        'pagename': 'Создание жалобы'
+    }
+
+
+
