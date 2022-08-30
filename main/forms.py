@@ -76,5 +76,4 @@ class CreateComplaintForm(forms.ModelForm):
         widgets = {
             'author': forms.HiddenInput(),
             'task': forms.HiddenInput(),
-            'description': forms.TextInput(attrs={'autocomplete': 'off'})
         }

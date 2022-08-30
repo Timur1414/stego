@@ -9,7 +9,7 @@
                 {% csrf_token %}
                 {{ form | crispy }}
                 <input type="submit" class="btn btn-primary" value="Создать">
-                <button class="btn btn-secondary" onclick="history.back();">Отменить</button>
+                <a class="btn btn-secondary" href="{% url 'task_list' %}">Отменить</a>
             </form>
         </div>
     </div>

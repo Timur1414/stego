@@ -26,7 +26,7 @@
             </div>
 
             <div class="mx-auto text-center d-flex justify-content-center align-items-center" style="width: 80vw">
-                <a class="btn btn-danger text-right me-3" href="#">Пожаловаться</a>
+                <a class="btn btn-danger text-right me-3" href="{% url 'create_complaint' task_id=task.id %}">Пожаловаться</a>
                 <img src="{{ task.image.url }}" style="max-width: 80vw" alt="Изображение с текстом">
                 <button class="btn btn-success text-right ms-3">Загрузить</button>
             </div>

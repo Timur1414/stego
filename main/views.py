@@ -12,7 +12,7 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.views.generic import DetailView, UpdateView, ListView, CreateView, TemplateView
 
-from main.forms import UserSettingsEditForm, CreateTaskForm
+from main.forms import UserSettingsEditForm, CreateTaskForm, CreateComplaintForm
 from main.models import UserSettings, Task, Complaint
 from stego.settings import BASE_URL
 
@@ -297,5 +297,21 @@ class CreateComplaintPage(LoginRequiredMixin, CreateView):
         'pagename': 'Создание жалобы'
     }
 
+    def get_success_url(self) -> str:
+        """
+        Получение перенаправляющей ссылки при успешном создании жалобы
+        """
+        return reverse('task_list')
 
-
+    def get_context_data(self, **kwargs) -> dict:
+        """
+        Формирование словаря для наполнения страницы
+        """
+        context = super().get_context_data(**kwargs)
+        task = Task.get_by_id(self.kwargs['task_id'])
+        context['task'] = task
+        context['form'] = CreateComplaintForm(initial={
+            'author': self.request.user,
+            'task': task
+        })
+        return context

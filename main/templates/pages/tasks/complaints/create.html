@@ -1,12 +1,16 @@
 {% extends "base/base.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %}
     <div class="row m-0">
-        <div class="col text-white">
-            <h3 class="text-center text-danger">Создание жалобы</h3>
+        <div class="col-8 mx-auto text-white">
+            <h3 class="text-center text-danger">Создание жалобы на задачу <a class="link-danger" href="{% url 'task' pk=task.id %}">{{ task.title }}</a></h3>
 
             <form action="." method="POST">
                 {% csrf_token %}
+                {{ form|crispy }}
+                <input type="submit" class="btn btn-primary" value="Создать">
+                <a class="btn btn-secondary" href="{% url 'task_list' %}">Отменить</a>
             </form>
         </div>
     </div>
