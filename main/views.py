@@ -315,3 +315,36 @@ class CreateComplaintPage(LoginRequiredMixin, CreateView):
             'task': task
         })
         return context
+
+
+class ComplaintPage(LoginRequiredMixin, DetailView):
+    """
+    Страница просмотра жалобы
+    Доступна только администраторам
+    """
+    model = Complaint
+    template_name = 'pages/tasks/complaints/index.html'
+    extra_context = {
+        'BASE_URL': BASE_URL,
+        'pagename': 'Жалоба'
+    }
+
+    def post(self, request, *args, **kwargs):
+        """
+        Обработчик POST-запроса
+        """
+        action = request.POST.get('action')
+        complaint = Complaint.get_by_id(self.kwargs['pk'])
+        if action == 'accept':
+            complaint.accept()
+        elif action == 'dismiss':
+            complaint.dismiss()
+        return redirect(to='complaint_list')
+
+    def get_context_data(self, **kwargs) -> dict:
+        """
+        Формирование словаря для наполнения страницы
+        """
+        context = super().get_context_data(**kwargs)
+        context['complaint'] = self.object
+        return context

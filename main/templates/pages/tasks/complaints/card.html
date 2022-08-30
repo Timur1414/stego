@@ -1,4 +1,4 @@
-<a class="text-decoration-none" href="#">
+<a class="text-decoration-none" href="{% url 'complaint' pk=item.id %}">
     <div class="card border border-2 border-danger rounded-top rounded-0 m-4 pb-3" style="background-color: #1E0400; width: 20vw; height: 30vh">
         <div class="card-header text-center bg-dark text-danger">
             <strong>{{ item.task.title }}</strong>

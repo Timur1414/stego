@@ -73,7 +73,7 @@ class Task(models.Model):
         """
         Получение задач, которые создал пользователь
         """
-        return Task.objects.filter(author=user)
+        return Task.objects.filter(author=user, active=True)
 
     def get_done_count(self):
         """
@@ -150,6 +150,32 @@ class Complaint(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     description = models.TextField()
     state = models.IntegerField(default=0)
+
+    @staticmethod
+    def get_by_id(id: int):
+        """
+        Получение жалобы по id
+        """
+        try:
+            return Complaint.objects.get(id=id)
+        except Complaint.DoesNotExist:
+            return None
+
+    def accept(self):
+        """
+        Принятие жалобы и блокировка задачи
+        """
+        self.state = 1
+        self.task.active = False
+        self.save()
+        self.task.save()
+
+    def dismiss(self):
+        """
+        Отклонение жалобы
+        """
+        self.state = 2
+        self.save()
 
     @staticmethod
     def get_active():

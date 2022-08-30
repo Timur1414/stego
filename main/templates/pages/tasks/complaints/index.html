@@ -1,19 +1,29 @@
 {% extends "base/base.html" %}
+{% load static %}
 
 {% block content %}
     <div class="row m-0">
         <div class="col text-white">
-            <h3 class="text-center text-danger">Жалоба на <a class="link-light" href="#">{task}</a></h3>
+            <h3 class="text-center text-danger">Жалоба на <a class="link-danger" href="{% url 'task' pk=complaint.task.id %}">{{ complaint.task.title }}</a></h3>
 
             <div class="border border-3 rounded p-4 mx-auto my-5 overflow-auto" style="width: 80vw">
-                {description}
+                {{ complaint.description }}
             </div>
 
-            <form action="." method="POST">
+            <form class="text-center my-4 mx-auto" action="." method="POST" style="width: 80vw">
                 {% csrf_token %}
-                <input class="btn btn-success" type="submit" value="Принять">
-                <input class="btn btn-danger" type="submit" value="Отклонить">
+                <input id="action" type="hidden" name="action" value="">
+                <input class="btn btn-success mx-5" type="submit" onclick="set_action('accept')" value="Принять">
+                <input class="btn btn-danger mx-5" type="submit" onclick="set_action('dismiss')" value="Отклонить">
             </form>
+
+            <div class="mx-auto mt-4" style="width: 80vw">
+                <a class="btn btn-secondary" href="{% url 'complaint_list' %}">К списку жалоб</a>
+            </div>
         </div>
     </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'js/complaint/main.js' %}"></script>
 {% endblock %}
