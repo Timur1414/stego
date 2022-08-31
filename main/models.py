@@ -15,6 +15,7 @@ class UserSettings(models.Model):
     """
     user = models.OneToOneField(to=get_user_model(), on_delete=models.CASCADE)
     avatar = models.ImageField(upload_to='images/users/', default='images/users/no_avatar.png')
+    score = models.IntegerField(default=0)
 
     @staticmethod
     def get_usersettings_by_user(user: get_user_model):
@@ -27,6 +28,12 @@ class UserSettings(models.Model):
         if created:
             usersettings.save()
         return usersettings
+
+    def add_score(self, score: int):
+        """
+        Добавление очков
+        """
+        self.score += score
 
 
 @receiver(post_save, sender=get_user_model())
