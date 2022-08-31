@@ -1,6 +1,8 @@
 """
 Модуль с моделями
 """
+from typing import List
+
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.db.models.signals import post_save
@@ -69,20 +71,20 @@ class Task(models.Model):
     done = models.ManyToManyField(to=get_user_model())
 
     @staticmethod
-    def get_tasks_of_user(user: get_user_model()):
+    def get_tasks_of_user(user: get_user_model()) -> List:
         """
         Получение задач, которые создал пользователь
         """
         return Task.objects.filter(author=user, active=True)
 
-    def get_done_count(self):
+    def get_done_count(self) -> int:
         """
         Получение количества пользователей, решивших задачу
         """
         return self.done.count()
 
     @staticmethod
-    def get_done_tasks(user: get_user_model()):
+    def get_done_tasks(user: get_user_model()) -> List:
         """
         Получение сделаных задач
         """
@@ -93,7 +95,7 @@ class Task(models.Model):
                 result.append(task)
         return result
 
-    def is_done(self, user: get_user_model()):
+    def is_done(self, user: get_user_model()) -> bool:
         """
         Проверка на то, сделана ли задача
         """
@@ -116,7 +118,7 @@ class Task(models.Model):
             return None
 
     @staticmethod
-    def get_active():
+    def get_active() -> List:
         """
         Получение только активных задач
         """
@@ -181,14 +183,14 @@ class Complaint(models.Model):
         self.save()
 
     @staticmethod
-    def get_complaints_of_task(task: Task, state: int = 0):
+    def get_complaints_of_task(task: Task, state: int = 0) -> List:
         """
         Получение всех жалоб на задачу
         """
         return Complaint.objects.filter(task=task, state=state)
 
     @staticmethod
-    def get_active():
+    def get_active() -> List:
         """
         Получение жалоб "на рассмотрении"
         """

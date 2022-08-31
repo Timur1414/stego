@@ -329,7 +329,7 @@ class ComplaintPage(LoginRequiredMixin, DetailView):
         'pagename': 'Жалоба'
     }
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs) -> redirect:
         """
         Обработчик POST-запроса
         """
