@@ -346,5 +346,7 @@ class ComplaintPage(LoginRequiredMixin, DetailView):
         Формирование словаря для наполнения страницы
         """
         context = super().get_context_data(**kwargs)
+        if not self.request.user.is_staff:
+            raise Http404
         context['complaint'] = self.object
         return context
