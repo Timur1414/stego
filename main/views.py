@@ -86,6 +86,7 @@ class ProfilePage(LoginRequiredMixin, DetailView):
         context['created_tasks'] = [
             [task, task.get_done_count()] for task in created_tasks
         ]
+        context['suggestion_task'] = Task.get_suggestion_task(self.object)
         return context
 
 

@@ -72,10 +72,35 @@ class Task(models.Model):
     image = models.ImageField(upload_to='images/tasks/')
     answer = models.CharField(max_length=255)
     points = models.IntegerField()
+    score_tier = models.IntegerField()
     group = models.CharField(max_length=255, blank=True)
     created = models.DateTimeField(auto_now_add=True, null=False)
     active = models.BooleanField(default=True)
     done = models.ManyToManyField(to=get_user_model())
+
+    @staticmethod
+    def get_suggestion_task(user: get_user_model):
+        """
+        Выбор предлагаемой задачи
+        Сначала идёт выбор из задач, где  предлагаемый уровень в диапазоне от очков пользователя до очков + 5
+        Потом идёт выбор из задач, где  предлагаемый уровень выше, чем очки пользователя
+        Потом идёт выбор из задач, где  предлагаемый уровень ниже, чем очки пользователя
+        Если так и не нашлось задачи, то возврашается None
+        """
+        user_score = user.usersettings.score
+        tasks = Task.objects.filter(score_tier__gte=user_score, score_tier__lte=user_score + 5).order_by('score_tier')
+        for task in tasks:
+            if not task.is_done(user):
+                return task
+        tasks = Task.objects.filter(score_tier__gt=user_score + 5).order_by('score_tier')
+        for task in tasks:
+            if not task.is_done(user):
+                return task
+        tasks = Task.objects.filter(score_tier__lt=user_score).order_by('-score_tier')
+        for task in tasks:
+            if not task.is_done(user):
+                return task
+        return None
 
     @staticmethod
     def get_tasks_of_user(user: get_user_model()) -> List:
@@ -112,6 +137,8 @@ class Task(models.Model):
         """
         Обновление задачи при решении
         """
+        user.usersettings.add_score(self.points)
+        user.usersettings.save()
         self.done.add(user)
 
     @staticmethod

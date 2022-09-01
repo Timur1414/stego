@@ -1,3 +1,11 @@
-<div class="m-5">
-    <p class="text-white">{Предлагаемая задача}</p>
-</div>
+<a class="text-decoration-none" href="{% url 'task' pk=suggestion_task.id %}">
+    <div class="card border border-2 border-danger rounded-top rounded-0 my-5 mx-auto pb-3" style="background-color: #1E0400; width: 50vw; height: 40vh">
+        <div class="card-header text-center bg-dark text-danger">
+            <strong>{{ suggestion_task.title }}</strong>
+            <p class="text-white m-0 p-0">Автор: <strong>{{ suggestion_task.author }}</strong></p>
+        </div>
+        <div class="card-body text-white text-break" style="background-color: #1E0400; overflow: hidden">
+            {{ suggestion_task.description }}
+        </div>
+    </div>
+</a>
