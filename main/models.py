@@ -73,7 +73,6 @@ class Task(models.Model):
     answer = models.CharField(max_length=255)
     points = models.IntegerField()
     score_tier = models.IntegerField()
-    group = models.CharField(max_length=255, blank=True)
     created = models.DateTimeField(auto_now_add=True, null=False)
     active = models.BooleanField(default=True)
     done = models.ManyToManyField(to=get_user_model())
@@ -162,13 +161,6 @@ class Task(models.Model):
         Получение только активных задач
         """
         return Task.objects.filter(active=True)
-
-    @staticmethod
-    def get_by_group(group: str):
-        """
-        Получение задач по группе (блоку)
-        """
-        return Task.objects.filter(active=True, group=group)
 
     @staticmethod
     def get_by_title(title: str):
