@@ -192,6 +192,17 @@ class CreatedTasksPage(LoginRequiredMixin, DetailView):
         return context
 
 
+class EducationPage(LoginRequiredMixin, TemplateView):
+    """
+    Страница с обучением
+    """
+    template_name = 'pages/profile/education/index.html'
+    extra_context = {
+        'BASE_URL': BASE_URL,
+        'pagename': 'Обучение'
+    }
+
+
 class TaskListPage(LoginRequiredMixin, ListView):
     """
     Страница со списком задач

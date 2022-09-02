@@ -36,4 +36,5 @@ urlpatterns = [
     path('profile/settings/', views.ProfileSettingsPage.as_view(), name='profile_settings'),
     path('profile/history/', views.HistoryPage.as_view(), name='history'),
     path('profile/<int:pk>/created_tasks/', views.CreatedTasksPage.as_view(), name='created_tasks'),
+    path('profile/education/', views.EducationPage.as_view(), name='education'),
 ]
