@@ -137,7 +137,12 @@ class Task(models.Model):
         """
         Обновление задачи при решении
         """
-        user.usersettings.add_score(self.points)
+        points = self.points
+        if user.usersettings.score < self.score_tier - 5:
+            points *= 2
+        elif user.usersettings.score > self.score_tier + 10:
+            points *= 0.5
+        user.usersettings.add_score(int(points))
         user.usersettings.save()
         self.done.add(user)
 
