@@ -24,3 +24,11 @@ def check_answer(request):
         if right_answer == user_answer else
         '<p class="text-danger fs-4">Неправильный ответ</p>'
     })
+
+
+def get_tasks(request):
+    """
+    Получение задач по названию
+    """
+    data = request.GET.get('data', '')
+    tasks = Task.get_by_title(data)

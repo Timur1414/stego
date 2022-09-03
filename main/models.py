@@ -166,7 +166,7 @@ class Task(models.Model):
         """
         Получение задач по названию
         """
-        return Task.objects.filter(active=True, title=title)
+        return Task.objects.filter(active=True, title__icontains=title)
 
 
 class Complaint(models.Model):
