@@ -4,6 +4,13 @@
     <div class="row m-0">
         <div class="col text-white">
             <h3 class="text-center text-danger">Список задач</h3>
+
+            <form action="." method="POST">
+                {% csrf_token %}
+                <input type="text" name="title">
+                <input type="submit" value="Submit">
+            </form>
+
             <div class="mt-5 d-flex justify-content-around flex-wrap">
                 {% for item in context %}
                     {% include "pages/tasks/card.html" %}

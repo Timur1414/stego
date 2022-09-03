@@ -7,13 +7,19 @@ from django.contrib.auth import logout, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, JsonResponse
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.views.generic import DetailView, UpdateView, ListView, CreateView, TemplateView
+from rest_framework import mixins, generics
+from rest_framework.decorators import api_view
+from rest_framework.parsers import JSONParser
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from main.forms import UserSettingsEditForm, CreateTaskForm, CreateComplaintForm
 from main.models import UserSettings, Task, Complaint
+from main.serializers import TaskSerializer
 from stego.settings import BASE_URL
 
 
@@ -190,6 +196,31 @@ class CreatedTasksPage(LoginRequiredMixin, DetailView):
             [task, task.get_done_count()] for task in created_tasks
         ]
         return context
+
+
+class ApiTaskListPage(mixins.ListModelMixin, generics.GenericAPIView):
+    queryset = Task.get_active()
+    serializer_class = TaskSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+
+@api_view(['GET', 'POST'])
+def task_list_page(request):
+    if request.method == 'GET':
+        tasks = Task.get_active()
+        serializer = TaskSerializer(tasks, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = TaskSerializer(data=data)
+        if serializer.is_valid():
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.data, status=400)
 
 
 class TaskListPage(LoginRequiredMixin, ListView):
