@@ -44,7 +44,7 @@ class CreateTaskForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = ('author', 'title', 'description', 'image', 'answer', 'points', 'group')
+        fields = ('author', 'title', 'description', 'image', 'answer', 'points')
         labels = {
             'title': 'Название',
             'description': 'Описание',
@@ -58,7 +58,6 @@ class CreateTaskForm(forms.ModelForm):
             'image': ClearableFileInput(attrs={'class': 'form-control'}),
             'title': forms.TextInput(attrs={'autocomplete': 'off'}),
             'answer': forms.TextInput(attrs={'autocomplete': 'off'}),
-            'group': forms.TextInput(attrs={'autocomplete': 'off'}),
         }
 
 
