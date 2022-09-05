@@ -8,3 +8,6 @@
 <div class="text-center">
     Автор: <strong><a class="link-light" href="{% url 'profile' pk=task.author.id %}">{{ task.author }}</a></strong>
 </div>
+<div class="text-center mt-5">
+    Рекомендуемое количество очков: <span class="text-warning">{{ task.score_tier }}</span>
+</div>
