@@ -1,0 +1,10 @@
+<h3 class="text-center
+            {% if done %}
+                text-success
+            {% else %}
+                text-danger
+            {% endif %}">{{ pagename }}</h3>
+
+<div class="text-center">
+    Автор: <strong><a class="link-light" href="{% url 'profile' pk=task.author.id %}">{{ task.author }}</a></strong>
+</div>

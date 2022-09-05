@@ -1,0 +1,27 @@
+<div class="border border-3 rounded p-4 mx-auto my-5 overflow-auto
+            {% if done %}
+                border-success
+            {% else %}
+                border-danger
+            {% endif %}" style="width: 80vw">
+    {{ task.description }}
+</div>
+
+<div class="mx-auto text-center d-flex justify-content-center align-items-center" style="width: 80vw">
+    <a class="btn btn-danger text-right me-3" href="{% url 'create_complaint' task_id=task.id %}">Пожаловаться</a>
+    <img src="{{ task.image.url }}" style="max-width: 80vw" alt="Изображение с текстом">
+    <a class="btn btn-success text-right ms-3" href="{{ task.image.url }}" download>Загрузить</a>
+</div>
+
+{% if not done %}
+    <div id="input_form" class="mx-auto text-center my-4" style="width: 80vw">
+        <div class="d-flex">
+            <input required id="answer" onchange="send_answer()" class="form-control" type="text" autocomplete="off" placeholder="Ответ...">
+            <button class="ms-2 btn btn-primary" onclick="send_answer()">Проверить</button>
+        </div>
+    </div>
+{% else %}
+    <div class="mx-auto text-center my-4" style="width: 80vw">
+        <p class="text-success fs-4">Задача уже решена</p>
+    </div>
+{% endif %}

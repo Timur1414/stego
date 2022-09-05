@@ -5,51 +5,9 @@
     <input id="task_id" type="hidden" value="{{ task.id }}">
     <div class="row m-0">
         <div class="col text-white">
-            <h3 class="text-center
-                        {% if done %}
-                            text-success
-                        {% else %}
-                            text-danger
-                        {% endif %}">{{ pagename }}</h3>
-
-            <div class="text-center">
-                Автор: <strong><a class="link-light" href="{% url 'profile' pk=task.author.id %}">{{ task.author }}</a></strong>
-            </div>
-
-            <div class="border border-3 rounded p-4 mx-auto my-5 overflow-auto
-                        {% if done %}
-                            border-success
-                        {% else %}
-                            border-danger
-                        {% endif %}" style="width: 80vw">
-                {{ task.description }}
-            </div>
-
-            <div class="mx-auto text-center d-flex justify-content-center align-items-center" style="width: 80vw">
-                <a class="btn btn-danger text-right me-3" href="{% url 'create_complaint' task_id=task.id %}">Пожаловаться</a>
-                <img src="{{ task.image.url }}" style="max-width: 80vw" alt="Изображение с текстом">
-                <a class="btn btn-success text-right ms-3" href="{{ task.image.url }}" download>Загрузить</a>
-            </div>
-
-            {% if not done %}
-                <div id="input_form" class="mx-auto text-center my-4" style="width: 80vw">
-                    <div class="d-flex">
-                        <input required id="answer" onchange="send_answer()" class="form-control" type="text" autocomplete="off" placeholder="Ответ...">
-                        <button class="ms-2 btn btn-primary" onclick="send_answer()">Проверить</button>
-                    </div>
-                </div>
-            {% else %}
-                <div class="mx-auto text-center my-4" style="width: 80vw">
-                    <p class="text-success fs-4">Задача уже решена</p>
-                </div>
-            {% endif %}
-
-            <div class="mx-auto mt-4 text-end" style="width: 80vw">
-                Количество прохождений: <strong  id="done_count">{{ done_count }}</strong>
-            </div>
-            <div class="mx-auto mt-4 text-start" style="width: 80vw">
-                <a class="btn btn-secondary" href="{% url 'task_list' %}">К списку задач</a>
-            </div>
+            {% include "pages/tasks/task_header.html" %}
+            {% include "pages/tasks/task_main.html" %}
+            {% include "pages/tasks/task_footer.html" %}
         </div>
     </div>
 {% endblock %}
