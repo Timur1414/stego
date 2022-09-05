@@ -11,7 +11,7 @@
     {% block extra_css %}{% endblock %}
 </head>
 <body class="bg-dark">
-    <header class="position-fixed w-100 bg-dark" style="max-height: 15%; z-index: 1">
+    <header class="position-fixed w-100 bg-dark shadow" style="max-height: 15%; z-index: 1">
         {% if request.user.is_authenticated %}
             {% include 'base/auth_menu.html' %}
         {% else %}
