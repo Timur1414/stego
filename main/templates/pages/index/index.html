@@ -8,17 +8,20 @@
         <h1>ПОБЕЖДАЙ</h1>
         <p class="text-white fs-4">всё это на платформе STEGO</p>
     </div>
-    <a class="btn btn-success position-relative" href="{% url 'django_registration_register' %}" style="left: 25%">
+    <a class="btn btn-success position-relative" href="{% url 'django_registration_register' %}" style="left: 25%; width: 50%">
         Зарегистрироваться
     </a>
     <br><br><br>
 
-    <div class="card mx-auto my-5" style="width: 50%">
-        <div class="card-header">
-            Оттачивайте навыки
+    <div class="card mx-auto my-5 border-0" style="width: 50%">
+        <div class="card-header text-white" style="background-color: #1E0400">
+            <h5>Оттачивайте навыки</h5>
         </div>
-        <div class="card-body">
-            Решайте задачи по стеганографии разного уровня сложности и разной категории
+        <div class="card-body bg-danger">
+            Решайте задачи по стеганографии разного уровня сложности и разной категории <br>
+            <a class="btn btn-success mt-2" href="{% url 'django_registration_register' %}">
+                Зарегистрироваться
+            </a>
         </div>
     </div>
 
