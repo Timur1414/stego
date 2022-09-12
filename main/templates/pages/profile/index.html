@@ -7,8 +7,10 @@
             {% include "pages/profile/people_card.html" %}
             {% if request.user == user %}
                 <a class="btn btn-primary" href="{% url 'profile_settings' %}" style="position:absolute; right: 5vw; top: 0">Настройки</a>
-                <a class="btn btn-primary" href="{% url 'create_task' %}" style="position:absolute; right: 5vw; top: 10vh">Создать задачу</a>
-                <a class="btn btn-primary" href="{% url 'education' %}" style="position:absolute; right: 5vw; top: 20vh">Обучение</a>
+                <a class="btn btn-primary" href="{% url 'education' %}" style="position:absolute; right: 5vw; top: 10vh">Обучение</a>
+                {% if user.usersettings.score > 10 %}
+                    <a class="btn btn-primary" href="{% url 'create_task' %}" style="position:absolute; right: 5vw; top: 20vh">Создать задачу</a>
+                {% endif %}
             {% include "pages/profile/suggestion_task.html" %}
                 {% include "pages/profile/history_and_my_tasks.html" %}
             {% else %}
