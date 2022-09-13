@@ -105,7 +105,7 @@ class Task(models.Model):
         """
         Получение задач, которые создал пользователь
         """
-        return Task.objects.filter(author=user, active=True)
+        return Task.objects.filter(author=user, active=True).order_by('created')
 
     def get_done_count(self) -> int:
         """

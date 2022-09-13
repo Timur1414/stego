@@ -11,7 +11,9 @@
                 {% if user.usersettings.score > 10 %}
                     <a class="btn btn-primary" href="{% url 'create_task' %}" style="position:absolute; right: 5vw; top: 20vh">Создать задачу</a>
                 {% endif %}
-            {% include "pages/profile/suggestion_task.html" %}
+                {% if suggestion_task %}
+                    {% include "pages/profile/suggestion_task.html" %}
+                {% endif %}
                 {% include "pages/profile/history_and_my_tasks.html" %}
             {% else %}
                 {% include "pages/profile/created_tasks.html" %}
