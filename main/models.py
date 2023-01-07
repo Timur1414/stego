@@ -118,7 +118,7 @@ class Task(models.Model):
         """
         Получение сделаных задач
         """
-        tasks = Task.get_active()
+        tasks = Task.get_active().order_by('created')
         result = []
         for task in tasks:
             if user in task.done.all():
