@@ -254,7 +254,7 @@ class CreateTaskPage(LoginRequiredMixin, CreateView):
     Страница создания задачи
     """
     model = Task
-    fields = ['author', 'title', 'description', 'image', 'answer', 'points', 'group']
+    fields = ['author', 'title', 'description', 'image', 'answer', 'points']
     template_name = 'pages/tasks/create.html'
     extra_context = {
         'BASE_URL': BASE_URL,

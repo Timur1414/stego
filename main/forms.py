@@ -51,7 +51,6 @@ class CreateTaskForm(forms.ModelForm):
             'image': 'Картинка со спрятанным текстом',
             'answer': 'Ответ',
             'points': 'Очки за успешное прохождение задачи',
-            'group': 'Группа (блок) задачи',
         }
         widgets = {
             'author': forms.HiddenInput(),
