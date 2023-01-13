@@ -254,7 +254,7 @@ class CreateTaskPage(LoginRequiredMixin, CreateView):
     Страница создания задачи
     """
     model = Task
-    fields = ['author', 'title', 'description', 'image', 'answer', 'points']
+    fields = ['author', 'title', 'description', 'image', 'answer', 'points', 'score_tier']
     template_name = 'pages/tasks/create.html'
     extra_context = {
         'BASE_URL': BASE_URL,
@@ -272,7 +272,10 @@ class CreateTaskPage(LoginRequiredMixin, CreateView):
         Формирование словаря для наполнения страницы
         """
         context = super().get_context_data(**kwargs)
-        context['form'] = CreateTaskForm(initial={'author': self.request.user})
+        context['form'] = CreateTaskForm(initial={
+            'author': self.request.user,
+            'score_tier': self.request.user.usersettings.score
+        })
         return context
 
 
