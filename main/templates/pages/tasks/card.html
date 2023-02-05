@@ -1,12 +1,12 @@
 <a href="{% url 'task' pk=item.0.id %}" class="text-decoration-none">
-    <div data-augmented-ui="tl-2-clip-y br-clip border" class="card m-4 pb-3"
-         style="background-color: #1E0400; width: 20vw; height: 30vh;
+    <div data-augmented-ui="tl-2-clip-y tr-2-round-inset br-clip border" class="border border-0 bg-gradient card m-4 pb-3"
+         style="width: 20vw; height: 30vh; background-color: #38046C;
                 {% if item.1 %}
                     color: green;
                 {% else %}
                     color: red;
                 {% endif %}">
-        <div class="card-header text-center bg-dark
+        <div class="card-header text-center bg-dark bg-gradient
                     {% if item.1 %}
                         text-success
                     {% else %}
@@ -15,8 +15,10 @@
             <strong>{{ item.0.title }}</strong>
             <p class="text-white m-0 p-0">Автор: <strong>{{ item.0.author }}</strong></p>
         </div>
-        <div class="card-body text-white text-break" style="background-color: #1E0400; overflow: hidden">
+        <div class="card-body text-white text-break" style="overflow: hidden">
             {{ item.0.description }}
         </div>
     </div>
 </a>
+
+<!--background-color: #38046C; #A71428;-->
