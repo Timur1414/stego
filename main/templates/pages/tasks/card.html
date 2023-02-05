@@ -1,10 +1,11 @@
 <a href="{% url 'task' pk=item.0.id %}" class="text-decoration-none">
-    <div class="card border border-2 rounded-top rounded-0 m-4 pb-3
+    <div data-augmented-ui="tl-2-clip-y br-clip border" class="card m-4 pb-3"
+         style="background-color: #1E0400; width: 20vw; height: 30vh;
                 {% if item.1 %}
-                    border-success
+                    color: green;
                 {% else %}
-                    border-danger
-                {% endif %}" style="background-color: #1E0400; width: 20vw; height: 30vh">
+                    color: red;
+                {% endif %}">
         <div class="card-header text-center bg-dark
                     {% if item.1 %}
                         text-success
