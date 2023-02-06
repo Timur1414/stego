@@ -6,10 +6,10 @@
 
             {% include "pages/profile/people_card.html" %}
             {% if request.user == user %}
-                <a data-augmented-ui="tl-clip br-clip" class="btn btn-primary" href="{% url 'profile_settings' %}" style="position:absolute; right: 5vw; top: 0">Настройки</a>
-                <a data-augmented-ui="tl-clip br-clip" class="btn btn-primary" href="{% url 'education' %}" style="position:absolute; right: 5vw; top: 10vh">Обучение</a>
+                <a data-augmented-ui="tl-clip br-clip border" class="btn px-3 py-2 text-danger" href="{% url 'profile_settings' %}" style="position:absolute; right: 5vw; top: 0">Настройки</a>
+                <a data-augmented-ui="tl-clip br-clip border" class="btn px-3 py-2 text-danger" href="{% url 'education' %}" style="position:absolute; right: 5vw; top: 10vh">Обучение</a>
                 {% if user.usersettings.score > 10 %}
-                    <a data-augmented-ui="tl-clip br-clip" class="btn btn-primary" href="{% url 'create_task' %}" style="position:absolute; right: 5vw; top: 20vh">Создать задачу</a>
+                    <a data-augmented-ui="tl-clip br-clip border" class="btn px-3 py-2 text-danger" href="{% url 'create_task' %}" style="position:absolute; right: 5vw; top: 20vh">Создать задачу</a>
                 {% endif %}
                 {% if suggestion_task %}
                     {% include "pages/profile/suggestion_task.html" %}
