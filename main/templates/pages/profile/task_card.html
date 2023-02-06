@@ -1,5 +1,5 @@
-<a class="text-decoration-none text-white" href="{% url 'task' pk=item.0.id %}">
-    <div class="bg-danger p-0 my-4 d-flex align-self-center rounded">
+<a class="text-decoration-none text-white shadow" href="{% url 'task' pk=item.0.id %}">
+    <div data-augmented-ui="br-clip-x b-clip-xy" class="bg-danger p-0 my-4 d-flex align-self-center rounded">
         <div class="border-end">
             <img class="rounded m-1" style="max-height: 7vh; max-width: 10vw" src="{{ item.0.author.usersettings.avatar.url }}">
         </div>
