@@ -36,7 +36,7 @@ def tasks_search(request):
     tasks = Task.get_by_title(title)
     if not tasks:
         return JsonResponse({
-            'html': '<p class="text-danger">Ничего не найдено</p>'
+            'html': '<p class="text-danger fs-3">Ничего не найдено</p>'
         }, safe=False)
     tasks_html = ""
     for task in tasks:
