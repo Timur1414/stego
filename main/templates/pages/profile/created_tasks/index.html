@@ -3,7 +3,9 @@
 {% block content %}
     <div class="row m-0">
         <div class="col text-white">
-            <h3 class="text-center text-danger">Задачи, созданные {{ user }}</h3>
+            <h3 class="text-center m-auto" style="width: 30vw">
+                <div class="py-4 text-warning fs-2 px-5" data-augmented-ui="tl-2-rect-x br-2-step-inset t-clip-x border">Задачи, созданные {{ user }}</div>
+            </h3>
 
             {% for item in created_tasks %}
                 {% include "pages/profile/task_card.html" %}
