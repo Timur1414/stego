@@ -4,21 +4,25 @@
 {% block content %}
     <div class="row m-0">
         <div class="col text-white">
-            <h3 class="text-center text-danger">Жалоба на <a class="link-danger" href="{% url 'task' pk=complaint.task.id %}">{{ complaint.task.title }}</a></h3>
+            <h3 class="text-center m-auto" style="width: 85vw">
+                <div class="py-4 text-warning fs-2" data-augmented-ui="tl-2-rect-x br-2-step-inset t-clip-x border">
+                    Жалоба на <a class="link-danger" href="{% url 'task' pk=complaint.task.id %}">{{ complaint.task.title }}</a>
+                </div>
+            </h3>
 
-            <div class="border border-3 border-danger rounded p-4 mx-auto my-5 overflow-auto" style="width: 80vw">
-                {{ complaint.description }}
+            <div data-augmented-ui="tl-clip-x tr-2-clip-x br-rect-x b-rect border" class="border-0 p-4 mx-auto my-5 overflow-auto text-danger" style="width: 80vw">
+                <div class="text-white">{{ complaint.description }}</div>
             </div>
 
             <form class="text-center my-4 mx-auto" action="." method="POST" style="width: 80vw">
                 {% csrf_token %}
                 <input id="action" type="hidden" name="action" value="">
-                <input class="btn btn-success mx-5" type="submit" onclick="set_action('accept')" value="Принять">
-                <input class="btn btn-danger mx-5" type="submit" onclick="set_action('dismiss')" value="Отклонить">
+                <input class="btn btn-success mx-5 rounded-0 bg-gradient" type="submit" onclick="set_action('accept')" value="Принять">
+                <input class="btn btn-danger mx-5 rounded-0 bg-gradient" type="submit" onclick="set_action('dismiss')" value="Отклонить">
             </form>
 
             <div class="mx-auto mt-4" style="width: 80vw">
-                <a class="btn btn-secondary" href="{% url 'complaint_list' %}">К списку жалоб</a>
+                <a data-augmented-ui="tl-clip r-clip bl-clip" class="btn btn-secondary px-4 py-2 rounded-0" href="{% url 'complaint_list' %}">К списку жалоб</a>
             </div>
         </div>
     </div>
