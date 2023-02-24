@@ -30,7 +30,9 @@ SECRET_KEY = 'django-insecure-ixvv+@p8&w%hgplj(f&oo+7^l*v^mdfxg&-gti+q%3m*$g86%m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'trtemirov.ru'
+]
 
 
 # Application definition
@@ -86,8 +88,11 @@ WSGI_APPLICATION = 'stego.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'f0783237_db',
+        'USER': 'f0783237_admin',
+        'PASSWORD': 'promprog',
+        'HOST': 'localhost',
     }
 }
 
