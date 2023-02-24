@@ -10,6 +10,16 @@
         <link rel="stylesheet" href="{% static 'css/augmented-ui-main/augmented-ui.min.css' %}">
     {% endblock %}
     {% block extra_css %}{% endblock %}
+    <style>
+        ::-webkit-scrollbar {
+            background-color: #1F1821;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: yellow;
+            box-shadow: inset 1px 1px 10px #f3faf7;
+        }
+    </style>
 </head>
 <body class="bg-dark">
     <header class="position-fixed w-100 bg-dark shadow" style="max-height: 15%; z-index: 1">
